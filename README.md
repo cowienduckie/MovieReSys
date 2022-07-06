@@ -12,7 +12,7 @@ Project for Introduction of Machine Learning subject
     pip3 install surprise    
 ```
 
-If <mark>pip3 install surprise</mark> command ocurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
+If `pip3 install surprise` command ocurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
 ```cmd
     conda install -c conda-forge scikit-surprise
 ```
