@@ -16,7 +16,7 @@ Project for Introduction of Machine Learning subject
 
 Download 2 input datasets below then put them into right folder in the input directory.
 
-1. [the-movies-dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/version/5?resource=download): Full MovieLens Dataset
+1. [the-movies-dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset): Full MovieLens Dataset
 2. [movies-data](https://www.kaggle.com/datasets/bentan233/movies-data): forked from the above dataset for optimization
 
 ## Run with Terminal
