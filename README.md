@@ -9,7 +9,12 @@ Project for Introduction of Machine Learning subject
     pip3 install pandas
     pip3 install sklearn
     pip3 install nltk
-    pip3 install surprise
+    pip3 install surprise    
+```
+
+If <mark>pip3 install surprise</mark> command ocurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
+```cmd
+    conda install -c conda-forge scikit-surprise
 ```
 
 ## Download datasets
@@ -19,9 +24,5 @@ Download 2 input datasets below then put them into right folder in the input dir
 1. [the-movies-dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset): Full MovieLens Dataset
 2. [movies-data](https://www.kaggle.com/datasets/bentan233/movies-data): forked from the above dataset for optimization
 
-## Run with Terminal
-
-```cmd
-    cd src
-    python main.py
-```
+## Build and Run
+With VSCode, run with interactive window using Jupyter extensions
