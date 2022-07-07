@@ -5,16 +5,16 @@ Project for Introduction of Machine Learning subject
 ## Install packages
 
 ```cmd
-    pip3 install wheel
-    pip3 install pandas
-    pip3 install sklearn
-    pip3 install nltk
-    pip3 install surprise    
+pip3 install wheel
+pip3 install pandas
+pip3 install sklearn
+pip3 install nltk
+pip3 install surprise    
 ```
 
 If `pip3 install surprise` command ocurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
 ```cmd
-    conda install -c conda-forge scikit-surprise
+conda install -c conda-forge scikit-surprise
 ```
 
 ## Download datasets
