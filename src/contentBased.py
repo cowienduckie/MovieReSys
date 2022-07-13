@@ -114,9 +114,3 @@ class ContentBasedRecommender:
         qualified['weighted_rating'] = (v / (v + m) * R) + (m / (m + v) * C)
         qualified = qualified.sort_values('weighted_rating', ascending=False)
         return qualified
-
-# recommender = ContentBasedRecommender()
-# recommender.recommend('The Dark Knight').head(10)
-# recommender.prepareMetadataBased()
-# recommender.recommend('The Dark Knight').head(10)
-# recommender.improved_recommendations('The Dark Knight').head(10)

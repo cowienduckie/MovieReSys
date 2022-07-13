@@ -33,6 +33,4 @@ class SimpleRecommender:
         df = self.md[self.md.genres.apply(lambda x: genre in x)]
         return self.weighted_rating(df, percentile)
 
-# recommender = SimpleRecommender()
-# recommender.build_chart('Romance').head(10)
 

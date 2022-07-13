@@ -12,17 +12,19 @@ pip3 install nltk
 pip3 install surprise    
 ```
 
-If `pip3 install surprise` command ocurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
+If `pip3 install surprise` command occurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
+
 ```cmd
 conda install -c conda-forge scikit-surprise
 ```
 
 ## Download datasets
 
-Download 2 input datasets below then put them into right folder in the input directory.
+Download 2 input datasets below then put them into the right folder in the input directory.
 
 1. [the-movies-dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset): Full MovieLens Dataset
 2. [movies-data](https://www.kaggle.com/datasets/bentan233/movies-data): forked from the above dataset for optimization
 
 ## Build and Run
-With VSCode, run with interactive window using Jupyter extensions
+
+With VSCode, run with an interactive window using Jupyter extensions
