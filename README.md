@@ -18,6 +18,15 @@ If `pip3 install surprise` command occurred errors, try to download [Anaconda](h
 conda install -c conda-forge scikit-surprise
 ```
 
+Or build Surprise from source code with the below commands (this required `numpy` and `cython`)
+
+```cmd
+pip install numpy cython
+git clone https://github.com/NicolasHug/surprise.git
+cd surprise
+python setup.py install
+```
+
 ## Download datasets
 
 Download 2 input datasets below then put them into the right folder in the input directory.
