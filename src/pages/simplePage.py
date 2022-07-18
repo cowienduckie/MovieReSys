@@ -9,50 +9,64 @@ class SimplePage(customtkinter.CTkFrame):
         super().__init__()
         
         customtkinter.CTkFrame.__init__(self)
+        
+        # Create recommender and get category list
         self.simpleRec = SimpleRecommender()
+        category_list = self.simpleRec.get_category_list()
+        category_list.sort()
 
         self.grid(row=0, column=1, sticky="nswe", padx=20, pady=20)
 
-        self.rowconfigure((0, 1, 2, 3), weight=1)
-        self.rowconfigure(7, weight=10)
-        self.columnconfigure((0, 1), weight=1)
-        self.columnconfigure(2, weight=0)
+        self.rowconfigure((0, 1, 2, 3, 4, 5, 6), weight=1)
+        self.rowconfigure(7, weight=2)
+        self.columnconfigure((0, 1, 2), weight=1)
 
         # Default values
-        self.category = 'Romance'
+        self.category = category_list[0]
         self.showed_results = 10
 
-        # Components
-        self.label = customtkinter.CTkLabel(master=self,
+        # Page name
+        self.page_name = customtkinter.CTkLabel(master=self,
                                             text="Simple Recommender",
                                             text_font=("Roboto Medium", 28))
-        self.label.grid(row=0, column=0, columnspan=3 )
+        self.page_name.grid(row=0, column=0, columnspan=3, sticky="s")
 
-        category_list = self.simpleRec.get_category_list
+        # Category filter       
+        self.category_label = customtkinter.CTkLabel(master=self, text="Choose a category:")
+
+        self.category_label.grid(row=1, column=0, pady=0, padx=0, sticky="ws")
 
         self.category_option = customtkinter.CTkOptionMenu(master=self,
                                                         values=category_list,
                                                         command= self.update_category)
 
-        self.category_option.grid(row=1, column=1, pady=10, padx=20, sticky='ew')
-        # self.category_option.config(width = len(self.category_option))
+        self.category_option.grid(row=2, column=0, pady=0, padx=20, sticky='ewn')
+
+        # Showed results
+        self.showed_results_label = customtkinter.CTkLabel(master=self, text="Choose number of result to show:")
+
+        self.showed_results_label.grid(row=1, column=1, pady=0, padx=20, sticky="ws")
 
         self.showed_results_option = customtkinter.CTkOptionMenu(master=self,
                                                         values=["10", "25", "50", "100"],
                                                         command= self.update_showed_result)
 
-        self.showed_results_option.grid(row=1, column=2, pady=10, padx=20, sticky='ew')
+        self.showed_results_option.grid(row=2, column=1, pady=0, padx=20, sticky='ewn')
 
         # Pandas table
-        self.dataframe = customtkinter.CTkFrame(master=self,
-                                                 width=180,
+        self.dataframe = customtkinter.CTkFrame(master=self,                                                
                                                  corner_radius=0)
-        self.dataframe.grid(row=2, column=0, columnspan=3, padx=20, sticky="nswe")
+        self.dataframe.grid(row=3, column=0, columnspan=3, rowspan=4, padx=20, sticky="nswe")
 
-        df = self.simpleRec.build_chart(self.category).head(self.showed_results)        
+        df = self.simpleRec.build_chart(self.category).head(self.showed_results)    
+        df.columns = ['Id', 'Title', 'Release date', 'Categories', 'Vote count',
+                    'Vote average', 'Popularity', 'Weighted rating']    
         self.table = Table(self.dataframe, dataframe=df,
-                                showtoolbar=True, showstatusbar=True)
+                                showtoolbar=True, showstatusbar=True, editable=False)
+        
         self.table.show()
+        self.table.zoomIn()
+        self.table.autoResizeColumns()
 
     def update_category(self, category):
         self.category = category

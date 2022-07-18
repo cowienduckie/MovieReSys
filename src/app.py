@@ -1,4 +1,4 @@
-import tkinter
+import tkinter as tk
 import tkinter.messagebox
 import customtkinter
 from pages.simplePage import *
@@ -21,8 +21,6 @@ class App(customtkinter.CTk):
         self.title("Movie ReSys")
         self.geometry(f"{App.WIDTH}x{App.HEIGHT}")
         self.protocol("WM_DELETE_WINDOW", self.on_closing)  # call .on_closing() when app gets closed
-
-
         # ============ create two frames ============
 
         # configure grid layout (2x1)
@@ -57,34 +55,35 @@ class App(customtkinter.CTk):
 
         # configure grid layout (1x11)
         self.frame_left.grid_rowconfigure(0, minsize=10)   # empty row with minsize as spacing
-        self.frame_left.grid_rowconfigure(6, weight=1)  # empty row as spacing
+        self.frame_left.grid_rowconfigure(2, minsize=10)  # empty row with minsize as spacing
+        self.frame_left.grid_rowconfigure(7, weight=1)  # empty row as spacing
         self.frame_left.grid_rowconfigure(8, minsize=20)    # empty row with minsize as spacing
         self.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
 
         self.app_name = customtkinter.CTkLabel(master=self.frame_left,
                                               text="Movie Recommender System",
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              text_font=("Roboto Medium", 16))  # font name and size in px
         self.app_name.grid(row=1, column=0, pady=10, padx=10)
 
         self.simple_btn = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Simple Recommender",
                                                 command=lambda: self.show_frame("SimplePage"))
-        self.simple_btn.grid(row=2, column=0, pady=10, padx=20, sticky='nesw')
-
+        self.simple_btn.grid(row=3, column=0, pady=10, padx=20, sticky='nesw')
+    
         self.content_btn = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Content Based Recommender",
                                                 command=lambda: self.show_frame("ContentBasedPage"))
-        self.content_btn.grid(row=3, column=0, pady=10, padx=20, sticky='nesw')
+        self.content_btn.grid(row=4, column=0, pady=10, padx=20, sticky='nesw')
 
         self.collab_btn = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Collaborative Based Recommender",
                                                 command=lambda: self.show_frame("CollaborativeBasedPage"))
-        self.collab_btn.grid(row=4, column=0, pady=10, padx=20, sticky='nesw')
+        self.collab_btn.grid(row=5, column=0, pady=10, padx=20, sticky='nesw')
 
         self.hybrid_btn = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Hybrid Recommender",
                                                 command=lambda: self.show_frame("HybridPage"))
-        self.hybrid_btn.grid(row=5, column=0, pady=10, padx=20, sticky='nesw')
+        self.hybrid_btn.grid(row=6, column=0, pady=10, padx=20, sticky='nesw')
 
         # Change theme
         self.theme_label = customtkinter.CTkLabel(master=self.frame_left, text="Appearance Mode:")
