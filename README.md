@@ -1,26 +1,29 @@
-# MovieReSys
+# The Movie Recommender System - Movie ReSys
 
 Project for Introduction of Machine Learning subject
 
 ## Install packages
 
-```cmd
+```shell
 pip3 install wheel
 pip3 install pandas
 pip3 install sklearn
 pip3 install nltk
-pip3 install surprise    
+pip3 install tkinter
+pip3 install customtkinter
+pip3 install pandastable
+pip3 install surprise  
 ```
 
 If `pip3 install surprise` command occurred errors, try to download [Anaconda](https://www.anaconda.com/products/distribution) then run below command with Anaconda command prompt
 
-```cmd
+```shell
 conda install -c conda-forge scikit-surprise
 ```
 
 Or build Surprise from source code with the below commands (this required `numpy` and `cython`)
 
-```cmd
+```shell
 pip install numpy cython
 git clone https://github.com/NicolasHug/surprise.git
 cd surprise
@@ -36,4 +39,7 @@ Download 2 input datasets below then put them into the right folder in the input
 
 ## Build and Run
 
-With VSCode, run with an interactive window using Jupyter extensions
+```shell
+cd src
+python app.py
+```
