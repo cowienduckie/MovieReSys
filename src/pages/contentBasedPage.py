@@ -29,7 +29,7 @@ class ContentBasedPage(customtkinter.CTkFrame):
         self.page_name = customtkinter.CTkLabel(master=self,
                                             text="Content Based Recommender",
                                             text_font=("Roboto Medium", 28))
-        self.page_name.grid(row=0, column=0, columnspan=3, sticky="s")
+        self.page_name.grid(row=0, column=0, columnspan=4, sticky="s")
 
         # Title Input
         self.title_label = customtkinter.CTkLabel(master=self, text="Type the movie title below:")
