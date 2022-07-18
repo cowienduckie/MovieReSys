@@ -8,6 +8,7 @@ from hybrid import *
 # ## Simple Recommender
 simpleRec = SimpleRecommender()
 simpleRec.build_chart('Romance').head(10)
+simpleRec.build_chart('Mystery').head(20)
 
 # %% [markdown]
 # ## Content-based Recommender
