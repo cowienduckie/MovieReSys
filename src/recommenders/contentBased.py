@@ -25,6 +25,7 @@ class ContentBasedRecommender:
         tf = TfidfVectorizer(ngram_range=(1, 2), min_df=0, stop_words='english')
         tfidf_matrix = tf.fit_transform(self.smd['description'])
         self.cosine_sim = linear_kernel(tfidf_matrix)
+        self.prepareMetadataBased()
 
     def prepareMetadataBased(self):
         try:
@@ -81,29 +82,40 @@ class ContentBasedRecommender:
         soup.head()
         count = CountVectorizer(ngram_range=(1, 2), min_df=0, stop_words='english')
         count_matrix = count.fit_transform(soup)
-        self.cosine_sim = cosine_similarity(count_matrix)
+        self.cosine_sim_improved = cosine_similarity(count_matrix)
 
-    def recommend(self, title):
+    def recommendByDescription(self, title, is_improved=False):
         movie = self.smd[self.smd['title'] == title]
         if len(movie) > 1:
             print("There are duplications of same name. Choose index and use get_recommendations(idx)")
             print(movie)
-        else:
-            indexes = self.get_recommendations(movie.index[0])
-            recommend_movies = self.smd.iloc[indexes]
-            return recommend_movies[1:].set_index('id') 
+        
+        indexes = self.get_recommendations(movie.index[0], is_improved)
+        recommend_movies = self.smd.iloc[indexes]
+        return recommend_movies[1:].set_index('id') 
+    
+    def recommendByMetadata(self, title):
+        movies = self.recommendByDescription(title, True)
+        return movies
 
-    def get_recommendations(self, idx):    
-        sim_scores = list(enumerate(self.cosine_sim[idx]))
-        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-        return [i[0] for i in sim_scores if i[1] > 0.01]
 
-    def improved_recommendations(self, title):
-        movies = self.recommend(title)[:25]
+    def recommendByMetadataAndRating(self, title):
+        movies = self.recommendByDescription(title, True)[:25]
         md_s = pd.read_csv('../input/movies-data/metadata_small.csv', dtype=
         {'id': int, 'vote_count': int, 'vote_averages': float})
         md_s = md_s[md_s['id'].isin(movies.index)]
         return self.weighted_rating(md_s, 0.6)
+
+    def get_recommendations(self, idx, is_improved):
+
+        if (is_improved == True):
+            cosine_similarity = self.cosine_sim_improved
+        else:
+            cosine_similarity = self.cosine_sim
+
+        sim_scores = list(enumerate(cosine_similarity[idx]))
+        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+        return [i[0] for i in sim_scores if i[1] > 0.01]
 
     def weighted_rating(self, df, percentile=0.95):
         C = df['vote_average'].mean()

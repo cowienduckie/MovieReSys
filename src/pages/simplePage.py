@@ -34,7 +34,7 @@ class SimplePage(customtkinter.CTkFrame):
         # Category filter       
         self.category_label = customtkinter.CTkLabel(master=self, text="Choose a category:")
 
-        self.category_label.grid(row=1, column=0, pady=0, padx=0, sticky="ws")
+        self.category_label.grid(row=1, column=0, pady=0, padx=20, sticky="ws")
 
         self.category_option = customtkinter.CTkOptionMenu(master=self,
                                                         values=category_list,
