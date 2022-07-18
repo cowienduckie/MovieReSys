@@ -1,4 +1,5 @@
 import pandas as pd
+import ast
 from ast import literal_eval
 
 # Simple Recommender show results base on votes of all Users
@@ -18,6 +19,20 @@ class SimpleRecommender:
             self.md = self.md[self.md['title'].notnull()].astype({'vote_count': int})
             self.md = self.md[cols]
             self.md.to_csv('../input/movies-data/metadata_small.csv', index=False)
+    
+    def get_category_list(self):
+        gernes = self.md['genres'].tolist()
+
+        category_list = []
+
+        for item in gernes:
+            gernes_list = list(ast.literal_eval(item))
+            
+            for g in gernes_list:
+                category_list.append(g)           
+
+        return list(dict.fromkeys(category_list))
+
     
     def weighted_rating(self, df, percentile=0.95):
         C = df['vote_average'].mean()
