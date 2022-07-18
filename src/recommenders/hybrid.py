@@ -1,6 +1,6 @@
 import pandas as pd
-from contentBased import ContentBasedRecommender
-from collaborativeBased import CollaborativeBasedRecommender
+from recommenders.contentBased import *
+from recommenders.collaborativeBased import *
 
 class HybridRecommender:
     def __init__(self):
@@ -10,11 +10,8 @@ class HybridRecommender:
         self.contentBased = ContentBasedRecommender()
         self.collabBased = CollaborativeBasedRecommender()
 
-    def hybrid(self, userid, title):
-        movies = self.contentBased.recommend(title)
+    def recommend(self, userid, title):
+        movies = self.contentBased.recommendByMetadata(title)
         movies['est'] = [self.collabBased.algo.predict(userid, self.id_map.loc[x]['movieId']).est for x in movies.index]
         movies = movies.sort_values('est', ascending=False)
-        return movies.head(10)
-
-recommender = HybridRecommender()
-recommender.hybrid(1, 'Avatar')
+        return movies
